@@ -10,7 +10,7 @@
 
 ## Example Output
 ### Hitting Data
-![alt text](https://github.com/stanleykywu/MLB-Current-Player-Recent-Statistics-Web-Scraping/resources/hitter_example.png?raw=true)
+![Alt text](resources/hitter_example.png?raw=true "Title")
 
 ### Pitching Data
-![alt text](https://github.com/stanleykywu/MLB-Current-Player-Recent-Statistics-Web-Scraping/resources/pitcher_example.png?raw=true)
+![Alt text](resources/pitcher_example.png?raw=true "Title")
