@@ -12,8 +12,8 @@ def scrape(player_type, stats, filename):
     page_soup = soup(page_html, "html.parser")
     player_list = page_soup.findAll("li", {"class": "p-related-links__item"})
 
-    f = open(filename, "w")
-    f.write(", ".join(['name'] + stats) + '\n')
+    f = open('stat_scraper/generated_stats/' + filename, "w")
+    f.write(", ".join(stats) + '\n')
 
     for player in player_list:
         player_url = my_url + player.a['href']
@@ -29,10 +29,11 @@ def scrape(player_type, stats, filename):
         
         if player_recent_html:
             position_html = page_soup.find("div", {'class': 'player-header--vitals'})
+            position = position_html.ul.li.text
 
-            if player_type == 'P' and not position_html.ul.li.text == player_type:
+            if player_type == 'P' and not position == player_type:
                 continue
-            elif player_type == 'H' and position_html.ul.li.text == 'P':
+            elif player_type == 'H' and position == 'P':
                 continue
 
             name = page_soup.find("span", {'class': 'player-header--vitals-name'}).text
@@ -41,7 +42,7 @@ def scrape(player_type, stats, filename):
             for row in rows:
                 cells = row.findChildren('td')
                 row_values = [cell.span.text for cell in cells]
-                row_values = [name] + row_values
+                row_values = [name, position] + row_values
                 f.write(", ".join(row_values) + '\n') 
 
     f.close()
