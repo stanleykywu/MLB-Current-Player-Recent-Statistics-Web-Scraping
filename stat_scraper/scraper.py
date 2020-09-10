@@ -13,7 +13,7 @@ def scrape(player_type, stats, filename):
     player_list = page_soup.findAll("li", {"class": "p-related-links__item"})
 
     f = open('stat_scraper/generated_stats/' + filename, "w")
-    f.write(", ".join(stats) + '\n')
+    f.write(",".join(stats) + '\n')
 
     for player in player_list:
         player_url = my_url + player.a['href']
@@ -43,6 +43,6 @@ def scrape(player_type, stats, filename):
                 cells = row.findChildren('td')
                 row_values = [cell.span.text for cell in cells]
                 row_values = [name, position] + row_values
-                f.write(", ".join(row_values) + '\n') 
+                f.write(",".join(row_values) + '\n') 
 
     f.close()

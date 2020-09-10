@@ -3,10 +3,10 @@ import pandas as pd
 
 app = Flask(__name__)
 
-pitching_data = pd.read_csv('recent_mlb_pitcher_stats.csv', encoding = "ISO-8859-1", error_bad_lines=False)
+pitching_data = pd.read_csv('stat_scraper/generated_stats/recent_mlb_pitcher_stats.csv', encoding = "ISO-8859-1", error_bad_lines=False)
 pitching_data.columns = pitching_data.columns.str.replace(' ', '')
 
-hitting_data = pd.read_csv('recent_mlb_hitter_stats.csv', encoding = "ISO-8859-1", error_bad_lines=False)
+hitting_data = pd.read_csv('stat_scraper/generated_stats/recent_mlb_hitter_stats.csv', encoding = "ISO-8859-1", error_bad_lines=False)
 hitting_data.columns = hitting_data.columns.str.replace(' ', '')
 
 @app.route('/', methods=['POST', 'GET'])
@@ -20,10 +20,10 @@ def index():
 
         elif 'Last 7 Games' in request.form['submit_button']:
             if 'Pitching' in request.form['submit_button']:
-                data = pitching_data[pitching_data['Duration'] == ' Last 7 Games']
+                data = pitching_data[pitching_data['Duration'] == 'Last 7 Games']
                 data = data.sort_values('ERA')
             elif 'Hitting' in request.form['submit_button']:
-                data = hitting_data[hitting_data['Duration'] == ' Last 7 Games']
+                data = hitting_data[hitting_data['Duration'] == 'Last 7 Games']
                 data = data.sort_values('AVG', ascending=False)
             else:
                 return 'There was an issue determing the type of statistic to filter'
@@ -32,10 +32,10 @@ def index():
 
         elif 'Last 15 Games' in request.form['submit_button']:
             if 'Pitching' in request.form['submit_button']:
-                data = pitching_data[pitching_data['Duration'] == ' Last 15 Games']
+                data = pitching_data[pitching_data['Duration'] == 'Last 15 Games']
                 data = data.sort_values('ERA')
             elif 'Hitting' in request.form['submit_button']:
-                data = hitting_data[hitting_data['Duration'] == ' Last 15 Games']
+                data = hitting_data[hitting_data['Duration'] == 'Last 15 Games']
                 data = data.sort_values('AVG', ascending=False)
             else:
                 return 'There was an issue determing the type of statistic to filter'
@@ -44,10 +44,10 @@ def index():
 
         elif 'Last 30 Games' in request.form['submit_button']:
             if 'Pitching' in request.form['submit_button']:
-                data = pitching_data[pitching_data['Duration'] == ' Last 30 Games']
+                data = pitching_data[pitching_data['Duration'] == 'Last 30 Games']
                 data = data.sort_values('ERA')
             elif 'Hitting' in request.form['submit_button']:
-                data = hitting_data[hitting_data['Duration'] == ' Last 30 Games']
+                data = hitting_data[hitting_data['Duration'] == 'Last 30 Games']
                 data = data.sort_values('AVG', ascending=False)
             else:
                 return 'There was an issue determing the type of statistic to filter'
