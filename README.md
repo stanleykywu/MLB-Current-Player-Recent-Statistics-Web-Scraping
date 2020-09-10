@@ -10,7 +10,7 @@
 
 ## Example Output
 ### Hitting Data
-![Alt text](resources/hitter_example.png?raw=true)
+![Alt text](resources/hitter_example.PNG?raw=true)
 
 ### Pitching Data
-![Alt text](resources/pitcher_example.png?raw=true)
+![Alt text](resources/pitcher_example.PNG?raw=true)
