@@ -1,16 +1,16 @@
 from urllib.request import urlopen as urequest
 from bs4 import BeautifulSoup as soup
 
-my_url = 'https://www.mlb.com'
-
-client = urequest(my_url + '/players')
-page_html = client.read()
-client.close()
-
-page_soup = soup(page_html, "html.parser")
-player_list = page_soup.findAll("li", {"class": "p-related-links__item"})
-
 def scrape(player_type, stats, filename):
+    my_url = 'https://www.mlb.com'
+
+    client = urequest(my_url + '/players')
+    page_html = client.read()
+    client.close()
+
+    page_soup = soup(page_html, "html.parser")
+    player_list = page_soup.findAll("li", {"class": "p-related-links__item"})
+
     f = open(filename, "w")
     f.write(", ".join(['name'] + stats) + '\n')
 
@@ -27,7 +27,9 @@ def scrape(player_type, stats, filename):
         if player_recent_html:
             position_html = page_soup.find("div", {'class': 'player-header--vitals'})
 
-            if not position_html.ul.li.text == player_type:
+            if player_type == 'P' and not position_html.ul.li.text == player_type:
+                continue
+            elif player_type == 'H' and position_html.ul.li.text == 'P':
                 continue
 
             name = page_soup.find("img", {'class': 'player-headshot'})['alt']
