@@ -1,6 +1,6 @@
 # Web Scraping Current Player's Recent Statistics
 ## Installation
-- clone this repo
+- clone this repository: `git clone https://github.com/stanleykywu/MLB-Current-Player-Recent-Statistics-Web-Scraping.git`
 - install bs4: `pip install bs4`
 
 ## Generate CSV Spreadsheet
