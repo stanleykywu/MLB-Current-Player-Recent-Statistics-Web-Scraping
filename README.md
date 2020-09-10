@@ -5,4 +5,5 @@
 
 ## Generate CSV Spreadsheet
 - open python environment: `python`
-- import script: `
+- import scripts: `from mlb_recent_stats import pitcher_data, hitter_data`
+- run scripts: `pitcher_data()` or `hitter_data()`
