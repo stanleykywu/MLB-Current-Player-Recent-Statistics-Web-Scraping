@@ -1,4 +1,4 @@
-from scraper import scrape
+from stat_scraper.scraper import scrape
 
 def pitcher_data():
     stats = ['Duration', 'W', 'L', 'ERA', 'G', 'GS', 'SV', 'IP', 'H', 'ER', 'BB', 'SO', 'WHIP']

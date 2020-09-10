@@ -1,5 +1,6 @@
 from urllib.request import urlopen as urequest
 from bs4 import BeautifulSoup as soup
+import os
 
 def scrape(player_type, stats, filename):
     my_url = 'https://www.mlb.com'
