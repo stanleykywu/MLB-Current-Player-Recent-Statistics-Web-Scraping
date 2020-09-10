@@ -16,10 +16,12 @@ def scrape(player_type, stats, filename):
 
     for player in player_list:
         player_url = my_url + player.a['href']
-
-        client = urequest(player_url)
-        page_html = client.read()
-        client.close()
+        try:
+            client = urequest(player_url)
+            page_html = client.read()
+            client.close()
+        except:
+            continue
 
         page_soup = soup(page_html, "html.parser")
         player_recent_html = page_soup.findAll("div", {'class': 'player-splits--last player-splits--last-x'})
@@ -32,7 +34,7 @@ def scrape(player_type, stats, filename):
             elif player_type == 'H' and position_html.ul.li.text == 'P':
                 continue
 
-            name = page_soup.find("img", {'class': 'player-headshot'})['alt']
+            name = page_soup.find("span", {'class': 'player-header--vitals-name'}).text
             table = player_recent_html[0].div.div.div.div.table.tbody
             rows = table.findChildren(['th', 'tr'])
             for row in rows:
