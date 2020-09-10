@@ -3,10 +3,10 @@ import pandas as pd
 
 app = Flask(__name__)
 
-pitching_data = pd.read_csv('recent_mlb_pitcher_stats.csv', encoding = "ISO-8859-1")
+pitching_data = pd.read_csv('recent_mlb_pitcher_stats.csv', encoding = "ISO-8859-1", error_bad_lines=False)
 pitching_data.columns = pitching_data.columns.str.replace(' ', '')
 
-hitting_data = pd.read_csv('recent_mlb_hitter_stats.csv', encoding = "ISO-8859-1")
+hitting_data = pd.read_csv('recent_mlb_hitter_stats.csv', encoding = "ISO-8859-1", error_bad_lines=False)
 hitting_data.columns = hitting_data.columns.str.replace(' ', '')
 
 @app.route('/', methods=['POST', 'GET'])
