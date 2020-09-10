@@ -1,0 +1,5 @@
+__pycache__/
+main.py
+test.db
+recent_mlb_hitter_stats.csv
+recent_mlb_pitcher_stats.csv
