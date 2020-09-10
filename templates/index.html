@@ -7,11 +7,32 @@
 
 
 {% block body %}
-<div class="content">
+<div class="content" align="center">
     <form action="/" method="POST">
-        <input type="submit" value="Pitching Statistics">
-        <input type="submit" value="Hitting Statistics">
+        <input type="submit" name="submit_button" value="Pitching Statistics">
+        <input type="submit" name="submit_button" value="Hitting Statistics">
     </form>
+
+    <br>
+
+    {% if current_selection %}
+    <p style="font-weight: bold;">{{current_selection}}</p>
+    {% endif %}
+
+    <br>
+
+    {% if options %}
+    <form action="/" method="POST">
+        {% for option in options %}
+        <input type = 'submit' name= 'submit_button' value ="{{option}}">
+        {% endfor %}
+    </form>
+    {% endif %}
+
+    <br>
+    <br>
+    <br>
+
     {% if data %}
     {{data | safe}}
     {% endif %}
