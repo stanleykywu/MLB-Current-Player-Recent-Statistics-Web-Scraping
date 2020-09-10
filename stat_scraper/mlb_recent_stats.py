@@ -1,7 +1,7 @@
 from stat_scraper.scraper import scrape
 
 def pitcher_data():
-    stats = ['name', 'Position', 'Duration','W', 'L', 'ERA', 'G', 'GS', 'SV', 'IP', 'H', 'ER', 'BB', 'SO', 'WHIP']
+    stats = ['name', 'Position', 'Duration', 'W', 'L', 'ERA', 'G', 'GS', 'SV', 'IP', 'H', 'ER', 'BB', 'SO', 'WHIP']
     filename = 'recent_mlb_pitcher_stats.csv'
     scrape('P', stats, filename)
 def hitter_data():

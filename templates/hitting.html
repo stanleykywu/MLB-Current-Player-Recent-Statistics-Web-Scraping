@@ -1,0 +1,45 @@
+{% extends 'base.html'%}
+
+
+{% block head %}
+<Title>Mlb Recent Hitting Statistics</Title>
+{% endblock %}
+
+
+{% block body %}
+<div class="content" align="center">
+    <form action="/" method="POST">
+        <p>Please select the duration for recent statistics:</p>
+        {% for option in options %}
+        <input type="radio" id="{{option}}" name="duration" value="{{option}}">
+        <label for="{{option}}"">{{option}}</label><br>
+        {% endfor %}
+
+        <br>
+
+        <p>Please select the position you want to search:</p>
+        {% for position in positions %}
+        <input type="radio" id="{{position}}" name="positions" value="{{position}}">
+        <label for="{{position}}"">{{position}}</label><br>
+        {% endfor %}
+
+        <br>
+
+        <p>Please select the statistic you want to sort by:</p>
+        {% for stat in stats %}
+        <input type="radio" id="{{stat}}" name="statistic" value="{{stat}}">
+        <label for="{{stat}}"">{{stat}}</label><br>
+        {% endfor %}
+
+        <br>
+
+        <p>Please input the number of results you want to be displayed:</p>
+        <input type="number" name="num">
+
+        <br>
+
+        <p>Submit your preferences:</p>
+        <input type='submit' value='Submit'>
+    </form>
+</div>
+{% endblock %}

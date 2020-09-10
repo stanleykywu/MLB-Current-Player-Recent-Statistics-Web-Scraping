@@ -13,51 +13,27 @@ hitting_data.columns = hitting_data.columns.str.replace(' ', '')
 def index():
     if request.method == 'POST':
         if request.form['submit_button'] == 'Pitching Statistics':
-            return render_template('index.html', current_selection='You have selected pitching statistics', options=['Pitching Last 7 Games', 'Pitching Last 15 Games', 'Pitching Last 30 Games'])
+            return redirect('/pitching-statistics')
 
         elif request.form['submit_button'] == 'Hitting Statistics':
-            return render_template('index.html', current_selection='You have selected hitting statistics',  options=['Hitting Last 7 Games', 'Hitting Last 15 Games', 'Hitting Last 30 Games'])
-
-        elif 'Last 7 Games' in request.form['submit_button']:
-            if 'Pitching' in request.form['submit_button']:
-                data = pitching_data[pitching_data['Duration'] == 'Last 7 Games']
-                data = data.sort_values('ERA')
-            elif 'Hitting' in request.form['submit_button']:
-                data = hitting_data[hitting_data['Duration'] == 'Last 7 Games']
-                data = data.sort_values('AVG', ascending=False)
-            else:
-                return 'There was an issue determing the type of statistic to filter'
-
-            return render_template('index.html', data=data.to_html())
-
-        elif 'Last 15 Games' in request.form['submit_button']:
-            if 'Pitching' in request.form['submit_button']:
-                data = pitching_data[pitching_data['Duration'] == 'Last 15 Games']
-                data = data.sort_values('ERA')
-            elif 'Hitting' in request.form['submit_button']:
-                data = hitting_data[hitting_data['Duration'] == 'Last 15 Games']
-                data = data.sort_values('AVG', ascending=False)
-            else:
-                return 'There was an issue determing the type of statistic to filter'
-
-            return render_template('index.html', data=data.to_html())
-
-        elif 'Last 30 Games' in request.form['submit_button']:
-            if 'Pitching' in request.form['submit_button']:
-                data = pitching_data[pitching_data['Duration'] == 'Last 30 Games']
-                data = data.sort_values('ERA')
-            elif 'Hitting' in request.form['submit_button']:
-                data = hitting_data[hitting_data['Duration'] == 'Last 30 Games']
-                data = data.sort_values('AVG', ascending=False)
-            else:
-                return 'There was an issue determing the type of statistic to filter'
-
-            return render_template('index.html', data=data.to_html())
+            return redirect('/hitting-statistics')
 
         else:
             return 'There was an issue selecting the type of statistic'
     return render_template('index.html')
 
+@app.route('/hitting-statistics', methods=['POST', 'GET'])
+def hitting_statistics():
+    options = ['Last 7 Games', 'Last 15 Games', 'Last 30 Games']
+    positions = ['C', '1B', '2B', 'SS', '3B', 'RF', 'CF', 'LF']
+    stats = ['AB', 'R', 'H', 'HR', 'RBI', 'BB', 'SO', 'SB', 'AVG', 'OBP', 'SLG']
+    return render_template('hitting.html', options=options, positions=positions, stats=stats)
+
+@app.route('/pitching-statistics', methods=['POST', 'GET'])
+def pitching_statistics():
+    options = ['Last 7 Games', 'Last 15 Games', 'Last 30 Games']
+    stats = ['W', 'L', 'ERA', 'G', 'GS', 'SV', 'IP', 'H', 'ER', 'BB', 'SO', 'WHIP']
+    return render_template('pitching.html', options=options, stats=stats)
 
 if __name__ == "__main__":
     app.run(debug=True)
