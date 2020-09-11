@@ -27,12 +27,35 @@ def hitting_statistics():
     options = ['Last 7 Games', 'Last 15 Games', 'Last 30 Games']
     positions = ['C', '1B', '2B', 'SS', '3B', 'RF', 'CF', 'LF']
     stats = ['AB', 'R', 'H', 'HR', 'RBI', 'BB', 'SO', 'SB', 'AVG', 'OBP', 'SLG']
+    
+    if request.method == 'POST':
+        duration = request.form['duration']
+        position = request.form['positions']
+        stat = request.form['statistic']
+        num_result = int(request.form['num'])
+
+        data = hitting_data[(hitting_data['Duration'] == duration) & (hitting_data['Position'] == position)]
+        data = data.sort_values(by=[stat], ascending=False)
+
+        return render_template('hitting.html', options=options, positions=positions, stats=stats, data=data.head(num_result).to_html())
+
     return render_template('hitting.html', options=options, positions=positions, stats=stats)
 
 @app.route('/pitching-statistics', methods=['POST', 'GET'])
 def pitching_statistics():
     options = ['Last 7 Games', 'Last 15 Games', 'Last 30 Games']
     stats = ['W', 'L', 'ERA', 'G', 'GS', 'SV', 'IP', 'H', 'ER', 'BB', 'SO', 'WHIP']
+    
+    if request.method == 'POST':
+        duration = request.form['duration']
+        stat = request.form['statistic']
+        num_result = int(request.form['num'])
+
+        data = hitting_data[hitting_data['Duration'] == duration]
+        data = data.sort_values(by=[stat], ascending=False)
+
+        return render_template('pitching.html', options=options, stats=stats, data=data.head(num_result).to_html())
+
     return render_template('pitching.html', options=options, stats=stats)
 
 if __name__ == "__main__":

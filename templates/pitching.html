@@ -8,19 +8,19 @@
 
 {% block body %}
 <div class="content" align="center">
-    <form action="/" method="POST">
+    <form action="/pitching-statistics" method="POST">
         <p>Please select the duration for recent statistics:</p>
         {% for option in options %}
-        <input type="radio" id="{{option}}" name="duration" value="{{option}}">
-        <label for="{{option}}"">{{option}}</label><br>
+        <input type="radio" id="{{option}}" name="duration" value="{{option}}">{{option}}</label>
+        <br>
         {% endfor %}
 
         <br>
 
         <p>Please select the statistic you want to sort by:</p>
         {% for stat in stats %}
-        <input type="radio" id="{{stat}}" name="statistic" value="{{stat}}">
-        <label for="{{stat}}"">{{stat}}</label><br>
+        <input type="radio" id="{{stat}}" name="statistic" value="{{stat}}">{{stat}}</label>
+        <br>
         {% endfor %}
 
         <br>
@@ -33,5 +33,12 @@
         <p>Submit your preferences:</p>
         <input type='submit' value='Submit'>
     </form>
+
+    <br>
+    <br>
+
+    {% if data %}
+    {{data | safe}}
+    {% endif %}
 </div>
 {% endblock %}
