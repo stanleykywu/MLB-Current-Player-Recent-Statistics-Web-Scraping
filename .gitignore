@@ -4,3 +4,4 @@ test.db
 recent_mlb_hitter_stats.csv
 recent_mlb_pitcher_stats.csv
 stat_scraper/__pycache__/
+stat_scraper/generated_stats/.ipynb_checkpoints
