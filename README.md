@@ -11,6 +11,7 @@ An app designed to help fantasy baseball player and general baseball fanatics sa
 - open python environment: `python`
 - import scripts: `from stat_scraper.team_scraper import scrape_hitting, scrape_pitching`
 - run scripts: `scrape_hitting(list: years of data to scrape)` or `scrape_pitching(list: years of data to scrape)`
+- example: `scrape_hitting(list(range(2010, 2020)))`
 
 ## Example Output
 ### Team Hitting Data
