@@ -13,7 +13,7 @@ def scrape_hitting(years):
     my_url = 'https://www.baseball-reference.com/leagues/MLB/'
 
     f = open('stat_scraper/generated_stats/team_hitting_statistics.csv', "w")
-    hitting_columns = ['Team', '#Bat', 'BatAge', 'R/G', 'G', 'PA', 'AB', 'R', 'R','H', '2B', '3B', 
+    hitting_columns = ['Team', '#Bat', 'BatAge', 'R/G', 'G', 'PA', 'AB', 'R','H', '2B', '3B', 
         'HR', 'RBI', 'SB', 'CS', 'BB', 'SO', 'BA', 'OBP', 'SLG', 'OPS', 'OPS+', 'TB', 'GDP', 'HBP', 'SH', 'SF', 'IBB', 'LOB', 'Postseason']
     f.write(",".join(hitting_columns) + '\n')
 
@@ -51,7 +51,7 @@ def scrape_hitting(years):
             team_name = row.th.a['title']
             cells = row.findChildren('td')
             row_values = [cell.text for cell in cells]
-            row_values = [team_name] + row_values
+            row_values = [str(year) + ' ' + team_name] + row_values
             if team_name in postseason_teams:
                 row_values.append('1')
             else:
@@ -107,7 +107,7 @@ def scrape_pitching(years):
             team_name = row.th.a['title']
             cells = row.findChildren('td')
             row_values = [cell.text for cell in cells]
-            row_values = [team_name] + row_values
+            row_values = [str(year) + ' ' + team_name] + row_values
             if team_name in postseason_teams:
                 row_values.append('1')
             else:
